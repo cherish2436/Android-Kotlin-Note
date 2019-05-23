@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -21,15 +22,19 @@ open class SearchBar @JvmOverloads constructor(
 
     private val mContext : Context = context
     private var mListener : SearchContentListener? = null
+    private var layout: RelativeLayout? = null
+    private var hasFocus: Boolean = false
+    private var editContent: EditText? = null
 
     init {
-        val layout : RelativeLayout = LayoutInflater.from(mContext).inflate(R.layout.view_search, this, false) as RelativeLayout
+        layout = LayoutInflater.from(mContext).inflate(R.layout.view_search, this, false) as RelativeLayout
 
-        val image_left = layout.findViewById(R.id.view_search_img_left) as ImageView
-        val image_delete = layout.findViewById(R.id.view_search_img_delete) as ImageView
-        val editContent = layout.findViewById(R.id.view_search_tv_content) as EditText
+        val imageLeft = layout!!.findViewById(R.id.view_search_img_left) as ImageView
+        val imageDelete = layout!!.findViewById(R.id.view_search_img_delete) as ImageView
+        editContent = layout!!.findViewById(R.id.view_search_tv_content) as EditText
 
-        editContent.addTextChangedListener(object : TextWatcher{
+        editContent!!.clearFocus()
+        editContent!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 Log.i("SearchBar", "before")
             }
@@ -37,8 +42,12 @@ open class SearchBar @JvmOverloads constructor(
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (p0!!.isNotEmpty()) {
                     if (mListener != null) mListener!!.getContent(p0.toString())
-                    if(!image_delete.isVisible) {
-                        image_delete.visibility = View.VISIBLE
+                    if (!imageDelete.isVisible) {
+                        imageDelete.visibility = View.VISIBLE
+                    }
+                } else {
+                    if (imageDelete.isVisible) {
+                        imageDelete.visibility = GONE
                     }
                 }
             }
@@ -48,21 +57,33 @@ open class SearchBar @JvmOverloads constructor(
             }
         })
 
-        editContent.onFocusChangeListener = OnFocusChangeListener { _, p1 ->
+        editContent!!.onFocusChangeListener = OnFocusChangeListener { _, p1 ->
             if (p1) {
-                image_left.setImageResource(R.drawable.ic_arrow_left)
-                editContent.hint = ""
+                imageLeft.setImageResource(R.drawable.ic_arrow_left)
+                editContent!!.hint = ""
+                hasFocus = true
+                mListener!!.hasFocus(true)
             } else {
-                image_left.setImageResource(R.drawable.ic_search)
-                editContent.hint = "搜索标签"
-            }
-            image_left.setOnClickListener {
-                image_left.setImageResource(R.drawable.ic_search)
+                imageLeft.setImageResource(R.drawable.ic_search)
+                editContent!!.hint = "搜索标签"
+                hasFocus = false
                 mListener!!.hasFocus(false)
+            }
+            imageLeft.setOnClickListener {
+                imageLeft.setImageResource(R.drawable.ic_search)
+                if (hasFocus) clear()
             }
         }
 
+        imageDelete.setOnClickListener { editContent!!.setText("") }
+
         addView(layout)
+    }
+
+    fun clear() {
+        layout!!.requestFocus()
+        layout!!.isFocusableInTouchMode = true
+        editContent!!.clearFocus()
     }
 
     fun contentListener(listener: SearchContentListener){
