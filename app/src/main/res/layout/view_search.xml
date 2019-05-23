@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/bg_search"
+        android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/view_search_img_left"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_search"/>
+
+    <ImageView
+            android:id="@+id/view_search_img_delete"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_delete_icon"
+            android:visibility="gone"/>
+
+    <EditText
+            android:id="@+id/view_search_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/view_search_img_delete"
+            android:layout_toEndOf="@id/view_search_img_left"
+            android:textColor="@color/black_4d4d4d"
+            android:textSize="14dp"
+            android:background="@null"
+            android:layout_marginStart="16dp"
+            android:cursorVisible="true"
+            android:hint="搜索标签"/>
+</RelativeLayout>
