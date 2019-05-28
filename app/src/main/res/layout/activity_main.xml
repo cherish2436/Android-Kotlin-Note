@@ -62,14 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/grey_e8ecef"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical">
-
-        <View
-                android:id="@+id/activity_main_view_line"
-                android:layout_width="match_parent"
-                android:layout_height="12dp"
-                android:visibility="gone"/>
 
         <com.cherish.note.view.SearchBar
                 android:id="@+id/activity_main_searchBar"

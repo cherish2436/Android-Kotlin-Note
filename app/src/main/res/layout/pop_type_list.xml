@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pop_type_list_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_pop_type_list"/>
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+
+        <TextView
+                android:id="@+id/pop_type_list_mkdir"
+                android:layout_width="wrap_content"
+                android:text="新建文件夹"
+                android:textSize="16dp"
+                android:drawablePadding="8dp"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_add_around"
+                android:textColor="@color/black_4d4d4d"
+                android:layout_height="wrap_content"/>
+    </FrameLayout>
+</LinearLayout>

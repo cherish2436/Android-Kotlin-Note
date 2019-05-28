@@ -10,6 +10,7 @@
 
     /****************** 黑色 ******************/
     <color name="black_4d4d4d">#4D4D4D</color>
+    <color name="black_333333">#333333</color>
 
     /****************** 黄色 ******************/
     <color name="yellow_ff9901">#FFFF9901</color>

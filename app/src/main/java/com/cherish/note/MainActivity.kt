@@ -1,12 +1,10 @@
 package com.cherish.note
 
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.cherish.note.interfaces.SearchContentListener
@@ -17,8 +15,6 @@ class MainActivity : AppCompatActivity() {
     private var setUpMenu : MenuItem? = null
     private var modeMenu : MenuItem? = null
 
-    private var isExpand: Boolean = false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,13 +23,18 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolBar)
         toolBar.navigationIcon = null
 
-        val searchBar = findViewById<SearchBar>(R.id.activity_main_searchBar)
+        val contentView = findViewById<LinearLayout>(R.id.activity_main_content_view)
+        contentView.requestFocus()
+        contentView.isFocusableInTouchMode = true
+
         val greyView = findViewById<View>(R.id.activity_main_view_grey)
         greyView.setOnClickListener {
-            searchBar.clear()
+            contentView.requestFocus()
+            contentView.isFocusableInTouchMode = true
+            toolBar.visibility = View.VISIBLE
         }
 
-        val windowUtils = WindowUtils()
+        val searchBar = findViewById<SearchBar>(R.id.activity_main_searchBar)
         searchBar.contentListener(object : SearchContentListener{
             override fun getContent(content: String) {
                 if (!TextUtils.isEmpty(content)) {
@@ -45,20 +46,12 @@ class MainActivity : AppCompatActivity() {
                 if (boolean) {
                     toolBar.visibility = View.GONE
                     greyView.visibility = View.VISIBLE
-                    findViewById<View>(R.id.activity_main_view_line).visibility = View.VISIBLE
                 } else {
                     toolBar.visibility = View.VISIBLE
                     greyView.visibility = View.GONE
-                    windowUtils.closeSoftInputWindow(this@MainActivity)
-                    findViewById<View>(R.id.activity_main_view_line).visibility = View.GONE
                 }
             }
         })
-
-
-        findViewById<LinearLayout>(R.id.activity_main_title_second).setOnClickListener {
-            titleClick()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -76,22 +69,5 @@ class MainActivity : AppCompatActivity() {
             //TODO : to list mode
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun imgAnimator(float: Float) {
-        val titleImg = findViewById<ImageView>(R.id.activity_main_title_img)
-        val objectAnimator = ObjectAnimator.ofFloat(titleImg, "rotation", float)
-        objectAnimator.duration = 500
-        objectAnimator.start()
-    }
-
-    private fun titleClick() {
-        if (isExpand) {
-            imgAnimator(0f)
-        } else {
-            imgAnimator(180f)
-        }
-
-        isExpand = !isExpand
     }
 }
