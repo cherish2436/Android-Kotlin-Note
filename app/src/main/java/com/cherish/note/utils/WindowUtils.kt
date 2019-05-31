@@ -1,4 +1,4 @@
-package com.cherish.note
+package com.cherish.note.utils
 
 import android.app.Activity
 import android.content.Context.INPUT_METHOD_SERVICE

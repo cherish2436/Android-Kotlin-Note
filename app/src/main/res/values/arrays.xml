@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="note_label">
+        <item>0</item>//默认标签
+        <item>999999</item>//废纸筒
+    </integer-array>
+
+    <integer-array name="note_type">
+        <item>0</item>//标准
+        <item>1</item>//文艺
+        <item>2</item>//古风
+        <item>3</item>//糖果
+        <item>4</item>//暗黑
+        <item>5</item>//星辰大海
+        <item>6</item>//黄
+        <item>7</item>//蓝
+        <item>8</item>//绿
+        <item>9</item>//红
+    </integer-array>
+</resources>

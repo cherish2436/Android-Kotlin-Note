@@ -1,11 +1,11 @@
-package com.cherish.note.db
+package com.cherish.note.model.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.cherish.note.db.dao.NoteDao
-import com.cherish.note.db.entity.NoteEntity
+import com.cherish.note.model.db.dao.NoteDao
+import com.cherish.note.model.db.entity.NoteEntity
 
 @Database(entities = [NoteEntity::class], version = 1)
 open abstract class AppDatabase : RoomDatabase() {
