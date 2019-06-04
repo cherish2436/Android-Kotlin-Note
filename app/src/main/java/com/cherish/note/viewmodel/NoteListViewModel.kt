@@ -13,6 +13,7 @@ import kotlin.coroutines.CoroutineContext
 open class NoteListViewModel(application: Application) : AndroidViewModel(application) {
     private val noteRepository: NoteRepository
     var noteList: LiveData<List<NoteEntity>>
+    var monthList: LiveData<List<String>>
 
     private var parentJob = Job()
     private val coroutineContext: CoroutineContext
@@ -23,6 +24,7 @@ open class NoteListViewModel(application: Application) : AndroidViewModel(applic
         val noteDao = AppDatabase.getDatabase(application).noteDao()
         noteRepository = NoteRepository(noteDao)
         noteList = noteRepository.getNoteByLabel(0)
+        monthList = noteRepository.getMonthList(0)
     }
 
     override fun onCleared() {
@@ -49,5 +51,15 @@ open class NoteListViewModel(application: Application) : AndroidViewModel(applic
     fun getDataFromLabel(label: Int) = scope.launch(Dispatchers.IO) {
         Log.e("NoteListViewModel", "query:I'm working in thread ${Thread.currentThread().name}")
         noteList = noteRepository.getNoteByLabel(label)
+    }
+
+    fun getDataFromSearch(word: String, label: Int) = scope.launch {
+        Log.e("NoteListViewModel", "getDataFromSearch:I'm working in thread ${Thread.currentThread().name}")
+        noteList = noteRepository.getNoteContainWord(word, label)
+    }
+
+    fun getMonths(label: Int) = scope.launch(Dispatchers.IO) {
+        Log.e("NoteListViewModel", "getMonth:I'm working in thread ${Thread.currentThread().name}")
+        monthList = noteRepository.getMonthList(label)
     }
 }

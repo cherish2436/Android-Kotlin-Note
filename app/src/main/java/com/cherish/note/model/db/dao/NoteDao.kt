@@ -10,7 +10,10 @@ open interface NoteDao {
     fun getNoteListByLabel(label: Int): LiveData<List<NoteEntity>>
 
     @Query("SELECT * FROM note WHERE content LIKE :content AND label = :label")
-    fun getNoteListContainContent(content: String, label: String): LiveData<List<NoteEntity>>
+    fun getNoteListContainContent(content: String, label: Int): LiveData<List<NoteEntity>>
+
+    @Query("SELECT DATE_FORMAT(date,'%Y-%c') FROM note WHERE label = :label GROUP By DATE_FORMAT(date,'%Y-%c')")
+    fun getNoteListDate(label: Int): LiveData<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveNoteData(note: NoteEntity)

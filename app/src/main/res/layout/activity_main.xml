@@ -90,6 +90,14 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:layout_height="match_parent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_main_rc_note_month_card"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"/>
         </FrameLayout>
     </LinearLayout>
 

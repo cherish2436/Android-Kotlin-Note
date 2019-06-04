@@ -7,6 +7,7 @@
     /****************** 灰色 ******************/
     <color name="grey_e8ecef">#e8ecef</color>
     <color name="grey_d1d9e0">#d1d9e0</color>
+    <color name="grey_888888">#888888</color>
 
     /****************** 黑色 ******************/
     <color name="black_4d4d4d">#4D4D4D</color>

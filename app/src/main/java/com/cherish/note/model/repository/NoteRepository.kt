@@ -13,8 +13,12 @@ class NoteRepository constructor(private val noteDao: NoteDao) {
         return noteDao.getNoteListByLabel(label)
     }
 
-    fun getNoteContainWord(word: String, label: String): LiveData<List<NoteEntity>> {
+    fun getNoteContainWord(word: String, label: Int): LiveData<List<NoteEntity>> {
         return noteDao.getNoteListContainContent(word, label)
+    }
+
+    fun getMonthList(label: Int): LiveData<List<String>> {
+        return noteDao.getNoteListDate(label)
     }
 
     @WorkerThread

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:id="@+id/item_note_list_month_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/item_note_list_month_tv_month"
+                android:layout_width="wrap_content"
+                android:textColor="@color/yellow_ff9901"
+                android:text="五月"
+                android:textSize="12dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content"/>
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey_d1d9e0"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

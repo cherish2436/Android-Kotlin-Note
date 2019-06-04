@@ -20,6 +20,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -34,9 +39,14 @@ dependencies {
     implementation "androidx.core:core-ktx:${rootProject.ext.androidx.ktx_version}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.androidx.constraintlayout_version}"
     implementation "androidx.coordinatorlayout:coordinatorlayout:${rootProject.ext.androidx.coordinatorlayout_version}"
-    implementation "androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"
+    implementation ("androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"){
+        exclude group: "com.google.guava"
+    }
+    annotationProcessor ("androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"){
+        exclude group: "com.google.guava"
+    }
     implementation "androidx.room:room-runtime:${rootProject.ext.androidx.room_version}"
-    implementation "androidx.room:room-testing:${rootProject.ext.androidx.room_version}"
+    testImplementation "androidx.room:room-testing:${rootProject.ext.androidx.room_version}"
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.androidx.lifecycle_version}"
@@ -45,15 +55,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime:${rootProject.ext.androidx.lifecycle_version}"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:${rootProject.ext.androidx.lifecycle_version}" // For Kotlin use kapt instead of annotationProcessor
     // alternately - if using Java8, use the following instead of lifecycle-compiler
-    implementation "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.androidx.lifecycle_version}"
-    // optional - ReactiveStreams support for LiveData
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:${rootProject.ext.androidx.lifecycle_version}" // For Kotlin use lifecycle-reactivestreams-ktx
+//    implementation "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.androidx.lifecycle_version}"
     // optional - Test helpers for LiveData
     testImplementation "androidx.arch.core:core-testing:${rootProject.ext.androidx.lifecycle_version}"
 
 
-    implementation "com.github.bumptech.glide:glide:${rootProject.ext.other.glide}"
-    annotationProcessor "com.github.bumptech.glide:compiler:${rootProject.ext.other.glide}"
+//    implementation "com.github.bumptech.glide:glide:${rootProject.ext.other.glide}"
+//    annotationProcessor "com.github.bumptech.glide:compiler:${rootProject.ext.other.glide}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
