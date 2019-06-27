@@ -21,7 +21,7 @@ class NoteListViewAdapter internal constructor() : RecyclerView.Adapter<NoteList
     }
 
     override fun onBindViewHolder(holder: NoteListViewHolder, position: Int) {
-        holder.initCard(noteList.get(position))
+        holder.initCard(noteList[position])
     }
 
     fun setData(noteList: List<NoteEntity>) {

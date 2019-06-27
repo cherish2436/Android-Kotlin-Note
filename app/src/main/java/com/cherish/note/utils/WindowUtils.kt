@@ -5,7 +5,7 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.inputmethod.InputMethodManager
 
 
-open class WindowUtils {
+class WindowUtils {
 
     /**
      * 关闭软键盘

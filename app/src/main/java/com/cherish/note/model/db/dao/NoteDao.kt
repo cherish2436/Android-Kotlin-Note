@@ -5,14 +5,14 @@ import androidx.room.*
 import com.cherish.note.model.db.entity.NoteEntity
 
 @Dao
-open interface NoteDao {
+interface NoteDao {
     @Query("SELECT * FROM note WHERE label = :label")
     fun getNoteListByLabel(label: Int): LiveData<List<NoteEntity>>
 
     @Query("SELECT * FROM note WHERE content LIKE :content AND label = :label")
     fun getNoteListContainContent(content: String, label: Int): LiveData<List<NoteEntity>>
 
-    @Query("SELECT DATE_FORMAT(date,'%Y-%c') FROM note WHERE label = :label GROUP By DATE_FORMAT(date,'%Y-%c')")
+    @Query("SELECT strftime('%Y-%m', date) FROM note WHERE label = :label GROUP BY strftime('%Y-%m', date)")
     fun getNoteListDate(label: Int): LiveData<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

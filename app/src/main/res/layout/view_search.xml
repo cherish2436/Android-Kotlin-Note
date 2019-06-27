@@ -36,6 +36,7 @@
             android:textColor="@color/black_4d4d4d"
             android:textSize="14dp"
             android:background="@null"
+            android:textCursorDrawable="@drawable/bg_edittext_cursor"
             android:layout_marginStart="16dp"
             android:cursorVisible="true"
             android:hint="搜索标签"/>

@@ -10,7 +10,7 @@ import com.cherish.note.model.repository.NoteRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-open class NoteListViewModel(application: Application) : AndroidViewModel(application) {
+class NoteListViewModel constructor(application: Application) : AndroidViewModel(application) {
     private val noteRepository: NoteRepository
     var noteList: LiveData<List<NoteEntity>>
     var monthList: LiveData<List<String>>
@@ -25,6 +25,50 @@ open class NoteListViewModel(application: Application) : AndroidViewModel(applic
         noteRepository = NoteRepository(noteDao)
         noteList = noteRepository.getNoteByLabel(0)
         monthList = noteRepository.getMonthList(0)
+//        if (noteList.value == null || noteList.value!!.isEmpty()){
+//            val list : ArrayList<NoteEntity> = ArrayList()
+//            val note = NoteEntity()
+//            note.content = "aaaaaaaaaaaaaaaaaaaaaaab\naaaaaaaaaaaaaaaaaaaaab\naaaaaaaaaaaab"
+//            note.date = "2019-01-01 14:00:01"
+//            note.label = 0
+//            note.type = 0
+//            list.add(note)
+//            saveData(note)
+//
+//            val note1 = NoteEntity()
+//            note1.content = "bbbbbbbbbbbbbbbbbbbbc\nbbbbbbbbbbbbbbbc\nbbbbbbbbbbbbbbbbbbbbbbbc"
+//            note1.date = "2019-02-01 15:00:01"
+//            note1.label = 0
+//            note1.type = 0
+//            list.add(note1)
+//            saveData(note1)
+//
+//            val note2 = NoteEntity()
+//            note2.content = "cccccccccccccccccccccccccccccccccccd"
+//            note2.date = "2019-02-01 16:00:01"
+//            note2.label = 0
+//            note2.type = 0
+//            list.add(note2)
+//            saveData(note2)
+//
+//            val note3 = NoteEntity()
+//            note3.content = "dddddddddddddddddde\nddddddddddddddde"
+//            note3.date = "2019-03-01 17:00:01"
+//            note3.label = 0
+//            note3.type = 0
+//            list.add(note3)
+//            saveData(note3)
+//
+//            val note4 = NoteEntity()
+//            note4.content = "eeeeeeeeeef\neeeeeeeeeeeeeeeeeeeeeeeeeef"
+//            note4.date = "2019-03-01 18:00:01"
+//            note4.label = 0
+//            note4.type = 0
+//            list.add(note4)
+//            saveData(note4)
+//
+//            noteList = noteRepository.getNoteByLabel(0)
+//        }
     }
 
     override fun onCleared() {

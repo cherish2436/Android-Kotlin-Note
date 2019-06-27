@@ -13,8 +13,8 @@
         <item name="colorAccent">@color/blue_0182dd</item>
         <item name="colorPrimary">@color/grey_e8ecef</item>
         <item name="colorPrimaryDark">@color/grey_e8ecef</item>
-        <item name="colorControlNormal">#d1d9e0</item>
-        <item name="colorControlActivated">@color/grey_d1d9e0</item>
+        <item name="colorControlNormal">@color/black_4d4d4d</item>
+        <item name="colorControlActivated">@color/grey_e8ecef</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowTranslucentStatus">true</item>

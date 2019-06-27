@@ -5,18 +5,19 @@ import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cherish.note.R
 import com.cherish.note.interfaces.SearchContentListener
 import com.cherish.note.view.SearchBar
+import com.cherish.note.view.WrapContentGridLayoutMananger
 import com.cherish.note.view.adapter.NoteListViewAdapter
 import com.cherish.note.viewmodel.NoteListViewModel
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
     private var setUpMenu : MenuItem? = null
@@ -33,18 +34,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolBar)
         toolBar.navigationIcon = null
 
-        val contentView = findViewById<LinearLayout>(R.id.activity_main_content_view)
-        contentView.requestFocus()
-        contentView.isFocusableInTouchMode = true
-
+        val floatBtn = findViewById<FloatingActionButton>(R.id.activity_main_btn_floating);
+        val appBar = findViewById<AppBarLayout>(R.id.activity_main_layout_bar)
         val greyView = findViewById<View>(R.id.activity_main_view_grey)
+        val searchBar = findViewById<SearchBar>(R.id.activity_main_searchBar)
         greyView.setOnClickListener {
-            contentView.requestFocus()
-            contentView.isFocusableInTouchMode = true
-            toolBar.visibility = View.VISIBLE
+            searchBar?.lostFocus()
         }
 
-        val searchBar = findViewById<SearchBar>(R.id.activity_main_searchBar)
         searchBar.contentListener(object : SearchContentListener{
             override fun getContent(content: String) {
                 if (!TextUtils.isEmpty(content)) {
@@ -54,18 +51,24 @@ class MainActivity : AppCompatActivity() {
 
             override fun hasFocus(boolean: Boolean) {
                 if (boolean) {
-                    toolBar.visibility = View.GONE
+                    appBar.visibility = View.GONE
                     greyView.visibility = View.VISIBLE
+                    floatBtn.visibility = View.GONE
                 } else {
-                    toolBar.visibility = View.VISIBLE
+                    appBar.visibility = View.VISIBLE
                     greyView.visibility = View.GONE
+                    floatBtn.visibility = View.VISIBLE
                 }
             }
         })
 
+        floatBtn.setOnClickListener({
+            //TODO:jump to a edit page
+        })
+
         listAdapter = NoteListViewAdapter()
         gridRecyclerView = findViewById(R.id.activity_main_rc_note_card)
-        gridRecyclerView!!.layoutManager = GridLayoutManager(this, 2)
+        gridRecyclerView!!.layoutManager = WrapContentGridLayoutMananger(this, 2)
         gridRecyclerView!!.adapter = listAdapter
 
         noteListViewModel = ViewModelProviders.of(this).get(NoteListViewModel::class.java)

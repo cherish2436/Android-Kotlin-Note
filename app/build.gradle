@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -39,13 +41,21 @@ dependencies {
     implementation "androidx.core:core-ktx:${rootProject.ext.androidx.ktx_version}"
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.androidx.constraintlayout_version}"
     implementation "androidx.coordinatorlayout:coordinatorlayout:${rootProject.ext.androidx.coordinatorlayout_version}"
-    implementation ("androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"){
-        exclude group: "com.google.guava"
-    }
-    annotationProcessor ("androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"){
-        exclude group: "com.google.guava"
-    }
+
     implementation "androidx.room:room-runtime:${rootProject.ext.androidx.room_version}"
+    kapt "androidx.room:room-compiler:${rootProject.ext.androidx.room_version}" // For Kotlin use kapt instead of annotationProcessor
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:${rootProject.ext.androidx.room_version}"
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation "androidx.room:room-guava:${rootProject.ext.androidx.room_version}"
+
+//    implementation ("androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"){
+//        exclude group: "com.google.guava"
+//    }
+//    kapt ("androidx.room:room-compiler:${rootProject.ext.androidx.room_version}"){
+//        exclude group: "com.google.guava"
+//    }
+//    implementation "androidx.room:room-runtime:${rootProject.ext.androidx.room_version}"
     testImplementation "androidx.room:room-testing:${rootProject.ext.androidx.room_version}"
 
     // ViewModel and LiveData
@@ -53,7 +63,7 @@ dependencies {
     // alternatively - Lifecycles only (no ViewModel or LiveData). Some UI
     // AndroidX libraries use this lightweight import for Lifecycle
     implementation "androidx.lifecycle:lifecycle-runtime:${rootProject.ext.androidx.lifecycle_version}"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:${rootProject.ext.androidx.lifecycle_version}" // For Kotlin use kapt instead of annotationProcessor
+    kapt "androidx.lifecycle:lifecycle-compiler:${rootProject.ext.androidx.lifecycle_version}" // For Kotlin use kapt instead of annotationProcessor
     // alternately - if using Java8, use the following instead of lifecycle-compiler
 //    implementation "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.androidx.lifecycle_version}"
     // optional - Test helpers for LiveData
